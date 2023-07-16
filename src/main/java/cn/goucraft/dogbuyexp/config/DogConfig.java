@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 public class DogConfig {
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
     private boolean exp_Is_Eanbale;
     private double expRateLevel0;
     private double expRateLevel1;
@@ -15,6 +15,10 @@ public class DogConfig {
     private double expRateLevel3;
     private double expRateLevel4;
     private double expRateLevel5;
+
+    public DogConfig(JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
 
     public boolean isExp_Is_Eanbale() {
         return exp_Is_Eanbale;
@@ -72,12 +76,6 @@ public class DogConfig {
         this.expRateLevel5 = expRateLevel5;
     }
 
-
-
-    public DogConfig(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
-
     public void saveResourceIfNotExists(String fileName) {
         File file = new File(plugin.getDataFolder(), fileName);
         if (!file.exists()) {
@@ -86,12 +84,12 @@ public class DogConfig {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
     }
 
-    public void loadConfig(){
-        File configFile=new File(plugin.getDataFolder(),"config.yml");
-        if (!configFile.exists()){
-            plugin.saveResource("config.yml",false);
+    public void loadConfig() {
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
+        if (!configFile.exists()) {
+            plugin.saveResource("config.yml", false);
         }
-        FileConfiguration configuration=YamlConfiguration.loadConfiguration(configFile);
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(configFile);
         setExp_Is_Eanbale(configuration.getBoolean("exprate.enable"));
         setExpRateLevel0(configuration.getDouble("exprate.level.0"));
         setExpRateLevel1(configuration.getDouble("exprate.level.1"));

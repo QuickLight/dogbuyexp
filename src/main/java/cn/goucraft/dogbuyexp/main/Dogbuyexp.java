@@ -17,19 +17,21 @@ public final class Dogbuyexp extends JavaPlugin {
     private static Economy econ = null;
     private static Permission perms = null;
     private static Chat chat = null;
-    DogCommand dogCommand=new DogCommand();
     private static Dogbuyexp instance;
     private static DogConfig dogConfig;
-    public static DogConfig getDogConfig(){
+    DogCommand dogCommand = new DogCommand();
+
+    public static DogConfig getDogConfig() {
         return dogConfig;
     }
-    public static Dogbuyexp getInstance(){
+
+    public static Dogbuyexp getInstance() {
         return instance;
     }
 
     @Override
     public void onEnable() {
-        instance=this;
+        instance = this;
 
         reload();
 
@@ -43,10 +45,11 @@ public final class Dogbuyexp extends JavaPlugin {
         // Plugin startup logic
 
     }
-    public void reload(){
+
+    public void reload() {
         saveDefaultConfig();
         reloadConfig();
-        dogConfig=new DogConfig(this);
+        dogConfig = new DogConfig(this);
         dogConfig.loadConfig();
     }
 

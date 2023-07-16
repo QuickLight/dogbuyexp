@@ -1,12 +1,10 @@
 package cn.goucraft.dogbuyexp.command;
 
-import cn.goucraft.dogbuyexp.config.DogConfig;
 import cn.goucraft.dogbuyexp.main.Dogbuyexp;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class DogCommand {
     private int exp;
@@ -18,30 +16,29 @@ public class DogCommand {
     public void buyexp(String[] args, Economy econ, Player player) {
         try {
             //获取玩家购买经验需要多少钱
-            exp=Integer.parseInt(args[1]);
-            if(Dogbuyexp.getDogConfig().isExp_Is_Eanbale()){
-                if (player.hasPermission("dogbuyexp.level0")){
+            exp = Integer.parseInt(args[1]);
+            if (Dogbuyexp.getDogConfig().isExp_Is_Eanbale()) {
+                if (player.hasPermission("dogbuyexp.level0")) {
                     expRate = Dogbuyexp.getDogConfig().getExpRateLevel0();
-                }else
-                if (player.hasPermission("dogbuyexp.level1")){
-                    expRate=Dogbuyexp.getDogConfig().getExpRateLevel1();
-                }else if (player.hasPermission("dogbuyexp.level2")){
-                    expRate=Dogbuyexp.getDogConfig().getExpRateLevel2();
-                }else if (player.hasPermission("dogbuyexp.level3")){
-                    expRate=Dogbuyexp.getDogConfig().getExpRateLevel3();
-                }else if (player.hasPermission("dogbuyexp.level4")){
-                    expRate=Dogbuyexp.getDogConfig().getExpRateLevel4();
-                }else if (player.hasPermission("dogbuyexp.level5")){
-                    expRate=Dogbuyexp.getDogConfig().getExpRateLevel5();
+                } else if (player.hasPermission("dogbuyexp.level1")) {
+                    expRate = Dogbuyexp.getDogConfig().getExpRateLevel1();
+                } else if (player.hasPermission("dogbuyexp.level2")) {
+                    expRate = Dogbuyexp.getDogConfig().getExpRateLevel2();
+                } else if (player.hasPermission("dogbuyexp.level3")) {
+                    expRate = Dogbuyexp.getDogConfig().getExpRateLevel3();
+                } else if (player.hasPermission("dogbuyexp.level4")) {
+                    expRate = Dogbuyexp.getDogConfig().getExpRateLevel4();
+                } else if (player.hasPermission("dogbuyexp.level5")) {
+                    expRate = Dogbuyexp.getDogConfig().getExpRateLevel5();
                 }
-            }else {
-                exp=0;
-                expRate=0;
+            } else {
+                exp = 0;
+                expRate = 0;
             }
-            needMoney=exp*expRate;
-            hasMoney= econ.getBalance(player.getName());
+            needMoney = exp * expRate;
+            hasMoney = econ.getBalance(player.getName());
 
-            if (exp!=0) {
+            if (exp != 0) {
                 if (hasMoney >= needMoney) {
                     //有钱
                     EconomyResponse economyResponse = econ.withdrawPlayer(player.getName(), needMoney);
@@ -56,13 +53,13 @@ public class DogCommand {
                     player.sendMessage(ChatColor.RED + "你没有足够的狗鸽币来购买 " + ChatColor.GREEN + exp + ChatColor.RED + " 经验");
                     player.sendMessage(ChatColor.RED + "购买 " + ChatColor.GREEN + exp + ChatColor.RED + " 经验需要 " + ChatColor.GREEN + needMoney + ChatColor.RED + " 狗鸽币");
                 }
-            } else{
+            } else {
                 player.sendMessage(ChatColor.RED + "你没有权限来购买经验");
             }
-            hasMoney=econ.getBalance(player.getName());
-            player.sendMessage(ChatColor.RED+"你的当前狗鸽币余额为："+ChatColor.GREEN+hasMoney);
+            hasMoney = econ.getBalance(player.getName());
+            player.sendMessage(ChatColor.RED + "你的当前狗鸽币余额为：" + ChatColor.GREEN + hasMoney);
 
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
         }
     }
 }
