@@ -1,6 +1,7 @@
 package cn.goucraft.dogbuyexp.command;
 
 import cn.goucraft.dogbuyexp.config.DogConfig;
+import cn.goucraft.dogbuyexp.main.Dogbuyexp;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.ChatColor;
@@ -11,15 +12,29 @@ public class DogCommand {
     private int exp;
     private double needMoney;
     private double hasMoney;
-    private static JavaPlugin plugin;
-    DogConfig dogConfig=new DogConfig(plugin);
 
 
-    public void buyexp(String[] args, Economy econ, Player player, double expRate) {
+    public void buyexp(String[] args, Economy econ, Player player) {
+        //                if (config.isExp_Is_Eanbale()){
+//                    if (player.hasPermission("dogbuyexp.level0")){
+//                        expRate= config.getExpRateLevel0();
+//                    }else if (player.hasPermission("dogbuyexp.level1")){
+//                        expRate=config.getExpRateLevel1();
+//                    }else if (player.hasPermission("dogbuyexp.level2")){
+//                        expRate=config.getExpRateLevel2();
+//                    }else if (player.hasPermission("dogbuyexp.level3")){
+//                        expRate=config.getExpRateLevel3();
+//                    }else if (player.hasPermission("dogbuyexp.level4")){
+//                        expRate=config.getExpRateLevel4();
+//                    }else if (player.hasPermission("dogbuyexp.level5")){
+//                        expRate=config.getExpRateLevel5();
+//                    }
+//                }
         try {
             //获取玩家购买经验需要多少钱
             exp=Integer.parseInt(args[1]);
-            needMoney=exp*dogConfig.getExpRateLevel0();
+            needMoney=exp*Dogbuyexp.getDogConfig().getExpRateLevel0();
+            player.sendMessage("测试"+Dogbuyexp.getDogConfig().getExpRateLevel0());
             hasMoney= econ.getBalance(player.getName());
 
             if (hasMoney>=needMoney){

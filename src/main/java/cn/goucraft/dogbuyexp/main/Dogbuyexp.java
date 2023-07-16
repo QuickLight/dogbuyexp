@@ -17,15 +17,22 @@ public final class Dogbuyexp extends JavaPlugin {
     private static Economy econ = null;
     private static Permission perms = null;
     private static Chat chat = null;
-    DogCommand dogCommand = new DogCommand();
-    private DogConfig config;
-    private double expRate;
+    DogCommand dogCommand=new DogCommand();
+    private static Dogbuyexp instance;
+    private static DogConfig dogConfig;
+    public static DogConfig getDogConfig(){
+        return dogConfig;
+    }
+    public static Dogbuyexp getInstance(){
+        return instance;
+    }
 
     @Override
     public void onEnable() {
-        config = new DogConfig(this);
-        config.saveResourceIfNotExists("config.yml");
-        config.loadConfig();
+        instance=this;
+
+        reload();
+
         if (!setupEconomy()) {
             //log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
@@ -35,6 +42,12 @@ public final class Dogbuyexp extends JavaPlugin {
         setupChat();
         // Plugin startup logic
 
+    }
+    public void reload(){
+        saveDefaultConfig();
+        reloadConfig();
+        dogConfig=new DogConfig(this);
+        dogConfig.loadConfig();
     }
 
     private boolean setupEconomy() {
@@ -79,22 +92,7 @@ public final class Dogbuyexp extends JavaPlugin {
                 }
             }
             if (args.length == 2 && args[0].equalsIgnoreCase("buy")) {
-//                if (config.isExp_Is_Eanbale()){
-//                    if (player.hasPermission("dogbuyexp.level0")){
-//                        expRate= config.getExpRateLevel0();
-//                    }else if (player.hasPermission("dogbuyexp.level1")){
-//                        expRate=config.getExpRateLevel1();
-//                    }else if (player.hasPermission("dogbuyexp.level2")){
-//                        expRate=config.getExpRateLevel2();
-//                    }else if (player.hasPermission("dogbuyexp.level3")){
-//                        expRate=config.getExpRateLevel3();
-//                    }else if (player.hasPermission("dogbuyexp.level4")){
-//                        expRate=config.getExpRateLevel4();
-//                    }else if (player.hasPermission("dogbuyexp.level5")){
-//                        expRate=config.getExpRateLevel5();
-//                    }
-//                }
-                dogCommand.buyexp(args, econ, player,expRate);
+                dogCommand.buyexp(args, econ, player);
                 return true;
             }
             //sender.sendMessage(ChatColor.RED + "Usage: /dogbuyexp buy <exp>");
