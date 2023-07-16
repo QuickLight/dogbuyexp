@@ -1,0 +1,9 @@
+name: dogbuyexp
+version: '${project.version}'
+main: cn.goucraft.dogbuyexp.main.Dogbuyexp
+api-version: '1.20'
+commands:
+  dogbuyexp:
+    description: 购买对应经验值
+    usage: /<command> buy [exp]
+    aliases: [dbe,dogb]

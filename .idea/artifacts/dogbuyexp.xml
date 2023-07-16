@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dogbuyexp">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="dogbuyexp.jar">
+      <element id="module-output" name="dogbuyexp" />
+    </root>
+  </artifact>
+</component>
