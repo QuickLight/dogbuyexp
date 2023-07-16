@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 public class DogConfig {
-    private static JavaPlugin plugin;
+    private JavaPlugin plugin;
     private boolean exp_Is_Eanbale;
     private double expRateLevel0;
     private double expRateLevel1;
@@ -72,9 +72,6 @@ public class DogConfig {
         this.expRateLevel5 = expRateLevel5;
     }
 
-    public JavaPlugin getPlugin() {
-        return plugin;
-    }
 
 
     public DogConfig(JavaPlugin plugin) {
