@@ -15,6 +15,64 @@ public class DogConfig {
     private double expRateLevel3;
     private double expRateLevel4;
     private double expRateLevel5;
+    private double keepWorld;
+    private double keepOther;
+    private int minDropWorld;
+    private int maxDropWorld;
+    private int minDropOther;
+    private int maxDropOther;
+
+    public int getMinDropWorld() {
+        return minDropWorld;
+    }
+
+    public void setMinDropWorld(int minDropWorld) {
+        this.minDropWorld = minDropWorld;
+    }
+
+    public int getMaxDropWorld() {
+        return maxDropWorld;
+    }
+
+    public void setMaxDropWorld(int maxDropWorld) {
+        this.maxDropWorld = maxDropWorld;
+    }
+
+    public int getMinDropOther() {
+        return minDropOther;
+    }
+
+    public void setMinDropOther(int minDropOther) {
+        this.minDropOther = minDropOther;
+    }
+
+    public int getMaxDropOther() {
+        return maxDropOther;
+    }
+
+    public void setMaxDropOther(int maxDropOther) {
+        this.maxDropOther = maxDropOther;
+    }
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
+
+    public double getKeepWorld() {
+        return keepWorld;
+    }
+
+    public void setKeepWorld(double keepWorld) {
+        this.keepWorld = keepWorld;
+    }
+
+    public double getKeepOther() {
+        return keepOther;
+    }
+
+    public void setKeepOther(double keepOther) {
+        this.keepOther = keepOther;
+    }
 
     public DogConfig(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -97,5 +155,11 @@ public class DogConfig {
         setExpRateLevel3(configuration.getDouble("exprate.level.3"));
         setExpRateLevel4(configuration.getDouble("exprate.level.4"));
         setExpRateLevel5(configuration.getDouble("exprate.level.5"));
+        setKeepWorld(configuration.getDouble("deathkeep.keepworld"));
+        setKeepOther(configuration.getDouble("deathkeep.keepother"));
+        setMinDropWorld(configuration.getInt("deathkeep.minDropWorld"));
+        setMinDropOther(configuration.getInt("deathkeep.minDropOther"));
+        setMaxDropWorld(configuration.getInt("deathkeep.maxDropWorld"));
+        setMaxDropOther(configuration.getInt("deathkeep.maxDropOther"));
     }
 }

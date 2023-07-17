@@ -10,3 +10,10 @@ exprate:
     3: 4
     4: 2
     5: 1
+deathkeep:
+  keepworld: 50
+  keepother: 100
+  minDropWorld: 3
+  maxDropWorld: 5
+  minDropOther: 5
+  maxDropOther: 10

@@ -2,9 +2,11 @@ package cn.goucraft.dogbuyexp.main;
 
 import cn.goucraft.dogbuyexp.command.DogCommand;
 import cn.goucraft.dogbuyexp.config.DogConfig;
+import cn.goucraft.dogbuyexp.listener.DogListener;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,6 +23,14 @@ public final class Dogbuyexp extends JavaPlugin {
     private static DogConfig dogConfig;
     DogCommand dogCommand = new DogCommand();
 
+    public static Economy getEcon() {
+        return econ;
+    }
+
+    public static void setEcon(Economy econ) {
+        Dogbuyexp.econ = econ;
+    }
+
     public static DogConfig getDogConfig() {
         return dogConfig;
     }
@@ -32,7 +42,7 @@ public final class Dogbuyexp extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
+        Bukkit.getPluginManager().registerEvents(new DogListener(), this);
         reload();
 
         if (!setupEconomy()) {
